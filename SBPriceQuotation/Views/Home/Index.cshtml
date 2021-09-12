@@ -1,0 +1,50 @@
+﻿@*  Using the model directive to bind the model to the view. 
+    This allows the view to use asp-for tag helper to bind HTML elements to the corresponding prpperties of the Object. 
+*@
+
+@model SBPriceQuotation.Models.PriceQuotationModel
+
+@{
+    //Setting the title fr the app.
+    ViewBag.Title = "Price Quotation";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=devie-width" />
+    <title>Price Quotation</title>
+    <link href="~/css/custom.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Price Quotation</h1>
+    <form asp-action="Index" method="post">
+        <!--View that displays the summary of Validation Messages-->
+        <div asp-validation-summary="All"></div>
+        <div>
+            <label asp-for="SubTotal">Sub Total:</label>
+            <input asp-for="SubTotal" />
+        </div>
+        <div>
+            <label asp-for="DiscountPercent">Discount Percent:</label>
+            <input asp-for="DiscountPercent" />
+        </div>
+        <div>
+            <label>Discount Amount:</label>
+            <!--Calling DA Property from HomeController.cs file.
+            Converting decimal values to string for lient view-->
+            <input value="@ViewBag.DA.ToString("C2")" readonly />
+        </div>
+        <div>
+            <label>Total:</label>
+            <!--Calling Ttl Property from HomeController.cs file.
+            Converting decimal values to string for lient view-->
+
+            <input value="@ViewBag.Ttl.ToString("C2")" />
+        </div>
+        <button type="submit">Calculate</button>
+        <a asp-action="Index">Clear</a>
+    </form>
+</body>
+</html>
